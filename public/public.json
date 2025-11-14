@@ -1,0 +1,14 @@
+[
+  {
+    "date": "2025-10-20",
+    "type": "research",
+    "title": "APS poster tweaks and data cleaning",
+    "link": "/Resume.pdf"
+  },
+  {
+    "date": "2025-10-12",
+    "type": "code",
+    "title": "PINN solver refactor with CLI experiments",
+    "link": "https://github.com/manishneupane0909-eng/pinn-pde-solver"
+  }
+]
