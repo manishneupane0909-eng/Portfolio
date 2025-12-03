@@ -1,5 +1,6 @@
-// src/data/stats.js (new file - create this if it doesn't exist)
+// src/data/stats.js
 export const stats = {
-  awardsCount: 5,  // Update with your actual count (e.g., APS presentations, etc.)
-  yearsCoding: 6   // e.g., since ~2019
+  awardsCount: 5,    // APS presentations, Dean's List, Research Scholarship, etc.
+  yearsCoding: 6,    // Since ~2019
+  projectsShipped: 6 // Total projects in portfolio
 };

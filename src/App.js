@@ -13,8 +13,8 @@ import SEO from './components/SEO';
 import ReactGA from 'react-ga';
 import './App.css';
 
-// Initialize Google Analytics (replace 'G-XXXXXXXXXX' with your tracking ID)
-ReactGA.initialize('G-XXXXXXXXXX');
+// Initialize Google Analytics - uncomment and add your tracking ID when ready
+// ReactGA.initialize('G-YOUR_TRACKING_ID');
 
 // Track page views on route change
 function PageTracker() {
@@ -66,7 +66,17 @@ export default function App() {
       primary: { main: '#00eaff' },
       secondary: { main: '#ff79c6' },
     },
-    typography: { fontFamily: "Inter, system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif" },
+    typography: { 
+      fontFamily: "'Outfit', system-ui, -apple-system, sans-serif",
+      h1: { fontFamily: "'Outfit', sans-serif", fontWeight: 800 },
+      h2: { fontFamily: "'Outfit', sans-serif", fontWeight: 800 },
+      h3: { fontFamily: "'Outfit', sans-serif", fontWeight: 800 },
+      h4: { fontFamily: "'Outfit', sans-serif", fontWeight: 700 },
+      h5: { fontFamily: "'Outfit', sans-serif", fontWeight: 700 },
+      h6: { fontFamily: "'Outfit', sans-serif", fontWeight: 600 },
+      overline: { fontFamily: "'Source Code Pro', monospace", letterSpacing: '0.1em' },
+      caption: { fontFamily: "'Source Code Pro', monospace" },
+    },
   }), [mode]);
 
   const toggleMode = () => setMode(m => {

@@ -1,28 +1,61 @@
 import React from 'react';
-import { Paper, Stack } from '@mui/material';
+import { Paper, Stack, Typography, Box } from '@mui/material';
 
+// Text-based logos for 100% reliability with custom styling
 const logos = [
-  { src: 'https://1000logos.net/wp-content/uploads/2020/01/South-Dakota-State-Jackrabbits-Logo.jpg', alt: 'SDSU Jackrabbits' },
-  { src: 'https://upload.wikimedia.org/wikipedia/en/thumb/7/7c/Logo-aps-no-tagline.svg/1200px-Logo-aps-no-tagline.svg.png', alt: 'APS' },
-  { src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Daktronics_Logo.svg/2560px-Daktronics_Logo.svg.png', alt: 'Daktronics' },
-  { src: 'https://seekvectorlogo.com/wp-content/uploads/2018/09/starship-technologies-vector-logo.png', alt: 'Starship' }
+  { text: 'SDSU', subtitle: 'Jackrabbits' },
+  { text: 'DAKTRONICS', subtitle: null },
+  { text: 'Starship', subtitle: 'Technologies' }
 ];
 
 export default function LogoRow() {
   return (
     <Paper elevation={0} sx={{ p: 2.5, borderRadius: 3, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.06)' }}>
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={3} useFlexGap flexWrap="wrap" alignItems="center" justifyContent="center">
+      <Typography variant="overline" sx={{ display: 'block', textAlign: 'center', color: '#6b8a8f', fontSize: '0.65rem', letterSpacing: '0.15em', mb: 2 }}>
+        Experience & Affiliations
+      </Typography>
+      <Stack direction="row" spacing={6} useFlexGap flexWrap="wrap" alignItems="center" justifyContent="center">
         {logos.map(l => (
-          <img
-            key={l.alt}
-            src={l.src}
-            alt={l.alt}
-            height={32}
-            loading="lazy"
-            style={{ filter: 'grayscale(100%) contrast(120%)', opacity: 0.85, mixBlendMode: 'luminosity', transition: 'filter 0.3s' }}
-            onMouseOver={e => e.currentTarget.style.filter = 'grayscale(0%) contrast(100%)'}
-            onMouseOut={e => e.currentTarget.style.filter = 'grayscale(100%) contrast(120%)'}
-          />
+          <Box
+            key={l.text}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              opacity: 0.6,
+              transition: 'all 0.3s ease',
+              cursor: 'default',
+              '&:hover': {
+                opacity: 1,
+                transform: 'scale(1.05)'
+              }
+            }}
+          >
+            <Typography 
+              sx={{ 
+                fontWeight: 800, 
+                fontSize: '1.3rem',
+                color: '#a8b8bc',
+                letterSpacing: '0.1em',
+                lineHeight: 1
+              }}
+            >
+              {l.text}
+            </Typography>
+            {l.subtitle && (
+              <Typography 
+                sx={{ 
+                  fontSize: '0.6rem',
+                  color: '#6b7c80',
+                  letterSpacing: '0.15em',
+                  textTransform: 'uppercase',
+                  mt: 0.25
+                }}
+              >
+                {l.subtitle}
+              </Typography>
+            )}
+          </Box>
         ))}
       </Stack>
     </Paper>
