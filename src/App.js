@@ -10,10 +10,10 @@ import Research from './components/Research';
 import Contact from './components/Contact';
 import ParticleBG from './components/ParticleBG';
 import SEO from './components/SEO';
-import ReactGA from 'react-ga';
 import './App.css';
 
-// Initialize Google Analytics - uncomment and add your tracking ID when ready
+// Google Analytics - add your tracking ID when ready
+// import ReactGA from 'react-ga4';
 // ReactGA.initialize('G-YOUR_TRACKING_ID');
 
 // Track page views on route change
