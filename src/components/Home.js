@@ -1,10 +1,8 @@
 // src/components/Home.js - Enhanced hero with recruiter-focused metrics
 import React from 'react';
-import { Box, Paper, Typography, Stack, Button, Chip, Avatar, Grid, Divider, Card, CardContent, ListItemIcon, Link as MuiLink } from '@mui/material';
+import { Box, Paper, Typography, Stack, Button, Chip, Avatar, Grid, Card, CardContent, ListItemIcon, Link as MuiLink } from '@mui/material';
 import { motion } from 'framer-motion';
-import CountUp from 'react-countup';
 import { projectsList } from './Projects';
-import { stats } from '../data/stats';
 import LogoRow from './LogoRow';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -24,10 +22,6 @@ const achievements = [
 ];
 
 export default function Home() {
-  const projectCount = projectsList.length;
-  const awardsCount = stats.awardsCount;
-  const yearsCoding = stats.yearsCoding;
-
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, pt: 6 }}>
       {/* HERO */}
