@@ -18,27 +18,48 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
 
   return (
     <AppBar position="fixed" elevation={0} sx={{ backdropFilter: 'blur(6px)', background: 'rgba(20,22,26,0.7)' }}>
-      <Toolbar sx={{ display: 'flex', gap: 1 }}> {/* Reduced gap */}
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+      <Toolbar 
+        sx={{ 
+          display: 'flex', 
+          gap: 1,
+          overflowX: 'auto',
+          overflowY: 'hidden',
+          '&::-webkit-scrollbar': {
+            height: '4px',
+          },
+          '&::-webkit-scrollbar-track': {
+            background: 'transparent',
+          },
+          '&::-webkit-scrollbar-thumb': {
+            background: 'rgba(0,234,255,0.3)',
+            borderRadius: '2px',
+          },
+          '&::-webkit-scrollbar-thumb:hover': {
+            background: 'rgba(0,234,255,0.5)',
+          },
+          minWidth: 'fit-content',
+        }}
+      >
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
           <Avatar src="/profile.jpeg" alt="Manish Neupane" sx={{ width: 36, height: 36 }} />
-          <Typography variant="h6" sx={{ fontWeight: 700 }}>Manish Neupane</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Manish Neupane</Typography>
         </Box>
 
-        <Box sx={{ flexGrow: 1, display: 'flex', gap: 1, justifyContent: 'center' }}>
+        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', flexShrink: 0, minWidth: 'fit-content' }}>
           {navItems.map((item) => (
             <Button
               key={item.to}
               component={Link}
               to={item.to}
               color={pathname === item.to ? 'secondary' : 'inherit'}
-              sx={{ textTransform: 'none', fontWeight: 600, fontSize: '0.875rem' }} // Smaller font
+              sx={{ textTransform: 'none', fontWeight: 600, fontSize: '0.875rem', whiteSpace: 'nowrap' }}
             >
               {item.label}
             </Button>
           ))}
         </Box>
 
-        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
           <Tooltip title={`Switch to ${mode === 'dark' ? 'light' : 'dark'} mode`}>
             <Switch checked={mode === 'dark'} onChange={onToggleMode} inputProps={{ 'aria-label': 'theme toggle' }} />
           </Tooltip>
