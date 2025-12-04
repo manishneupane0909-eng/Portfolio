@@ -37,7 +37,7 @@ export default function SEO() {
           },
           sameAs: [
             'https://github.com/manishneupane0909-eng',
-            'https://www.linkedin.com/in/manish-neupane/'
+            'https://www.linkedin.com/in/manish-neupane-380a65189'
           ],
           knowsAbout: ['Python', 'PyTorch', 'Machine Learning', 'Robotics', 'Physics', 'MATLAB', 'Data Automation', 'Materials Science', 'CUDA'],
           seeks: 'R&D, Robotics, or Software Engineering roles (graduating Spring 2026)'

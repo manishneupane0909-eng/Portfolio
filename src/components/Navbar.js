@@ -55,7 +55,7 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
           </Tooltip>
           <Tooltip title="LinkedIn">
             <IconButton
-              href="https://www.linkedin.com/in/manish-neupane/"
+              href="https://www.linkedin.com/in/manish-neupane-380a65189"
               target="_blank"
               rel="noopener noreferrer"
               color="primary"
