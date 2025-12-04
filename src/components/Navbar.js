@@ -17,13 +17,25 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
   const { pathname } = useLocation();
 
   return (
-    <AppBar position="fixed" elevation={0} sx={{ backdropFilter: 'blur(6px)', background: 'rgba(20,22,26,0.7)' }}>
+    <AppBar 
+      position="fixed" 
+      elevation={0} 
+      sx={{ 
+        backdropFilter: 'blur(6px)', 
+        background: 'rgba(20,22,26,0.7)',
+        width: '100%',
+        overflow: 'hidden',
+      }}
+    >
       <Toolbar 
         sx={{ 
           display: 'flex', 
           gap: 1,
+          width: '100%',
+          minWidth: 'max-content',
           overflowX: 'auto',
           overflowY: 'hidden',
+          px: { xs: 1, sm: 2 },
           '&::-webkit-scrollbar': {
             height: '4px',
           },
@@ -37,22 +49,24 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
           '&::-webkit-scrollbar-thumb:hover': {
             background: 'rgba(0,234,255,0.5)',
           },
-          minWidth: 'fit-content',
+          WebkitOverflowScrolling: 'touch',
         }}
       >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexShrink: 0 }}>
           <Avatar src="/profile.jpeg" alt="Manish Neupane" sx={{ width: 36, height: 36 }} />
-          <Typography variant="h6" sx={{ fontWeight: 700, whiteSpace: 'nowrap' }}>Manish Neupane</Typography>
+          <Typography variant="h6" sx={{ fontWeight: 700, whiteSpace: 'nowrap', display: { xs: 'none', sm: 'block' } }}>
+            Manish Neupane
+          </Typography>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 1, justifyContent: 'center', flexShrink: 0, minWidth: 'fit-content' }}>
+        <Box sx={{ display: 'flex', gap: 1, flexShrink: 0 }}>
           {navItems.map((item) => (
             <Button
               key={item.to}
               component={Link}
               to={item.to}
               color={pathname === item.to ? 'secondary' : 'inherit'}
-              sx={{ textTransform: 'none', fontWeight: 600, fontSize: '0.875rem', whiteSpace: 'nowrap' }}
+              sx={{ textTransform: 'none', fontWeight: 600, fontSize: '0.875rem', whiteSpace: 'nowrap', minWidth: 'fit-content' }}
             >
               {item.label}
             </Button>
@@ -70,8 +84,9 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
               rel="noopener noreferrer"
               color="primary"
               aria-label="GitHub profile"
+              size="small"
             >
-              <GitHubIcon />
+              <GitHubIcon fontSize="small" />
             </IconButton>
           </Tooltip>
           <Tooltip title="LinkedIn">
@@ -81,8 +96,9 @@ export default function Navbar({ mode = 'dark', onToggleMode = () => {} }) {
               rel="noopener noreferrer"
               color="primary"
               aria-label="LinkedIn profile"
+              size="small"
             >
-              <LinkedInIcon />
+              <LinkedInIcon fontSize="small" />
             </IconButton>
           </Tooltip>
         </Box>
