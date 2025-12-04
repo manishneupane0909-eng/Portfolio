@@ -32,7 +32,7 @@ export const projectsList = [
     tags: ['Python', 'MATLAB', 'Data Automation', 'Signal Processing'],
     description: 'Automated analysis pipeline for VSM/PPMS magnetometer data. Extracts saturation magnetization (Ms), coercivity (Hc), and remanence (Mr) from hysteresis loops with ML-based noise reduction.',
     highlights: 'Problem: Manual M-H analysis took hours → Automated extraction → 80% faster analysis, reproducible results',
-    github: 'https://github.com/manishneupane0909-eng/magnetometer-pipeline',
+    github: null, // Internal lab tool - code not public
     demo: null,
     image: null,
     featured: true
