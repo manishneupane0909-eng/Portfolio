@@ -28,21 +28,11 @@ export const projectsList = [
     featured: true
   },
   {
-    name: 'SecurePath Solution',
-    tags: ['React', 'Node.js', 'Machine Learning', 'Full-Stack'],
-    description: 'Secure path optimization platform with ML-based risk assessment. Implements encrypted routing algorithms for privacy-preserving navigation in dynamic environments.',
-    highlights: 'Problem: Standard routing exposes location data → Built encrypted path solver → Maintains privacy while optimizing routes',
-    github: 'https://github.com/manishneupane0909-eng/SecurePath-solution',
-    demo: null,
-    image: null,
-    featured: false
-  },
-  {
     name: 'Magnetometer Data Pipeline',
     tags: ['Python', 'MATLAB', 'Data Automation', 'Signal Processing'],
     description: 'Automated analysis pipeline for VSM/PPMS magnetometer data. Extracts saturation magnetization (Ms), coercivity (Hc), and remanence (Mr) from hysteresis loops with ML-based noise reduction.',
     highlights: 'Problem: Manual M-H analysis took hours → Automated extraction → 80% faster analysis, reproducible results',
-    github: null,
+    github: 'https://github.com/manishneupane0909-eng/magnetometer-pipeline',
     demo: null,
     image: null,
     featured: true
@@ -200,7 +190,7 @@ export default function Projects() {
       <Box sx={{ mb: 4 }}>
         <Typography variant="h4" sx={{ fontWeight: 800, color: 'primary.main', mb: 1 }}>Projects</Typography>
         <Typography variant="body1" sx={{ color: '#8ca0a3', maxWidth: 600 }}>
-          A mix of research tools, production systems, and side projects. Each one taught me something new about building software that actually ships.
+          Production-ready code with real impact. All repos include commit history, tests, and documentation. Click through to see the implementation details.
         </Typography>
       </Box>
 
