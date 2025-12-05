@@ -1,0 +1,128 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Outfit', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+:focus-visible {
+  outline: 2px dashed var(--color-primary, #00eaff);
+  outline-offset: 2px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: rgba(0, 234, 255, 0.3);
+  color: #fff;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--color-primary, #00eaff);
+  outline-offset: 2px;
+}
+
+[data-theme='dark'] {
+  --color-bg: #23242a;
+  --color-surface: rgba(24, 38, 44, 0.9);
+  --color-text: #eaf8fa;
+  --color-text-secondary: #8ca0a3;
+  --color-primary: #00eaff;
+  --color-secondary: #ff79c6;
+  --scrollbar-thumb: rgba(0, 234, 255, 0.3);
+  --scrollbar-track: rgba(255, 255, 255, 0.05);
+}
+
+[data-theme='light'] {
+  --color-bg: #ffffff;
+  --color-surface: rgba(255, 255, 255, 0.95);
+  --color-text: #1a1a2e;
+  --color-text-secondary: #6b7c85;
+  --color-primary: #0066cc;
+  --color-secondary: #cc0066;
+  --scrollbar-thumb: rgba(0, 102, 204, 0.3);
+  --scrollbar-track: rgba(0, 0, 0, 0.05);
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb);
+  opacity: 0.8;
+}
+
+@media (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.2);
+  }
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+

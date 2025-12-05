@@ -1,9 +1,10 @@
 import React from 'react';
 
-// CSS-only animated background - more performant, no version conflicts
-export default function ParticleBG() {
-  const prefersReduced = typeof window !== 'undefined' &&
-    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+export const ParticleBG: React.FC = () => {
+  const prefersReduced =
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   if (prefersReduced) return null;
 
@@ -16,7 +17,6 @@ export default function ParticleBG() {
           width: 100vw;
           height: 100vh;
           z-index: 0;
-          background: #23242a;
           overflow: hidden;
         }
         
@@ -72,7 +72,6 @@ export default function ParticleBG() {
           100% { transform: translate(0, 0); }
         }
         
-        /* Floating orbs */
         .orb {
           position: absolute;
           border-radius: 50%;
@@ -119,4 +118,5 @@ export default function ParticleBG() {
       <div className="orb orb-3" />
     </div>
   );
-}
+};
+
