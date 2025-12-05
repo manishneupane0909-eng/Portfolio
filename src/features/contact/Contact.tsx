@@ -10,7 +10,12 @@ import {
   Container,
 } from '@mui/material';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { ContactForm, ContactStatus } from '@/shared/types';
+
+const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
+const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
+const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
 
 export const Contact: React.FC = () => {
   const [form, setForm] = useState<ContactForm>({ name: '', email: '', message: '' });
@@ -20,27 +25,51 @@ export const Contact: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!form.name || !form.email || !form.message) {
       return;
     }
 
-    const subject = encodeURIComponent(`Contact from ${form.name}`);
-    const body = encodeURIComponent(
-      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-    );
-    const mailtoLink = `mailto:hi@mneupane.com?subject=${subject}&body=${body}`;
+    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+      const subject = encodeURIComponent(`Contact from ${form.name}`);
+      const body = encodeURIComponent(
+        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+      );
+      window.open(`mailto:hi@mneupane.com?subject=${subject}&body=${body}`, '_blank');
+      setStatus('ok');
+      setForm({ name: '', email: '', message: '' });
+      return;
+    }
 
-    window.open(mailtoLink, '_blank');
-    
-    setStatus('ok');
-    setForm({ name: '', email: '', message: '' });
-    
-    setTimeout(() => {
-      setStatus('idle');
-    }, 3000);
+    setStatus('loading');
+
+    try {
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        {
+          to_email: 'hi@mneupane.com',
+          from_name: form.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        PUBLIC_KEY
+      );
+
+      setStatus('ok');
+      setForm({ name: '', email: '', message: '' });
+      
+      setTimeout(() => {
+        setStatus('idle');
+      }, 3000);
+    } catch (err) {
+      setStatus('error');
+      setTimeout(() => {
+        setStatus('idle');
+      }, 3000);
+    }
   };
 
   return (
@@ -64,7 +93,17 @@ export const Contact: React.FC = () => {
 
             {status === 'ok' && (
               <Alert severity="success" sx={{ mb: 2 }}>
-                Check your email client - the message should be ready to send.
+                Message sent successfully. I'll get back to you soon!
+              </Alert>
+            )}
+            {status === 'error' && (
+              <Alert severity="error" sx={{ mb: 2 }}>
+                Failed to send. Please try again or use the email button below.
+              </Alert>
+            )}
+            {status === 'loading' && (
+              <Alert severity="info" sx={{ mb: 2 }}>
+                Sending...
               </Alert>
             )}
 
@@ -77,6 +116,7 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.name}
                 onChange={handleChange}
+                disabled={status === 'loading'}
               />
               <TextField
                 name="email"
@@ -87,6 +127,7 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.email}
                 onChange={handleChange}
+                disabled={status === 'loading'}
               />
               <TextField
                 name="message"
@@ -98,6 +139,7 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.message}
                 onChange={handleChange}
+                disabled={status === 'loading'}
               />
               <input
                 type="text"
@@ -119,9 +161,10 @@ export const Contact: React.FC = () => {
                   type="submit"
                   variant="contained"
                   color="primary"
+                  disabled={status === 'loading'}
                   sx={{ fontWeight: 600, flex: { xs: 1, sm: 'none' } }}
                 >
-                  Send
+                  {status === 'loading' ? 'Sending...' : 'Send'}
                 </Button>
                 <Button
                   variant="outlined"
@@ -139,4 +182,3 @@ export const Contact: React.FC = () => {
     </Container>
   );
 };
-
