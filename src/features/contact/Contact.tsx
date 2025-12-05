@@ -33,7 +33,7 @@ export const Contact: React.FC = () => {
     }
 
     const hasEmailJS = SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY && 
-                       SERVICE_ID !== '' && TEMPLATE_ID !== '' && PUBLIC_KEY !== '';
+                       SERVICE_ID.length > 0 && TEMPLATE_ID.length > 0 && PUBLIC_KEY.length > 0;
 
     if (!hasEmailJS) {
       const subject = encodeURIComponent(`Contact from ${form.name}`);
@@ -52,26 +52,24 @@ export const Contact: React.FC = () => {
     setStatus('loading');
 
     try {
-      const result = await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        {
-          to_email: 'hi@mneupane.com',
-          from_name: form.name,
-          from_email: form.email,
-          message: form.message,
-        },
-        PUBLIC_KEY
-      );
+      const templateParams = {
+        to_email: 'hi@mneupane.com',
+        from_name: form.name,
+        from_email: form.email,
+        message: form.message,
+        reply_to: form.email,
+      };
 
-      if (result.text === 'OK') {
+      const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
+
+      if (result.status === 200) {
         setStatus('ok');
         setForm({ name: '', email: '', message: '' });
         setTimeout(() => {
           setStatus('idle');
         }, 3000);
       } else {
-        throw new Error('EmailJS returned non-OK status');
+        throw new Error(`EmailJS returned status ${result.status}`);
       }
     } catch (err) {
       console.error('EmailJS error:', err);
