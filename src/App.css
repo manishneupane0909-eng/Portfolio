@@ -11,25 +11,20 @@ body {
 #particle-bg { position: fixed; inset: 0; width: 100vw; height: 100vh; z-index: 0; }
 #root, .MuiContainer-root { position: relative; z-index: 1; }
 
-/* Focus visibility */
 :focus-visible { outline: 2px dashed #00eaff; outline-offset: 2px; }
 
-/* Pulse animation for live status indicator */
 @keyframes pulse {
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.5; transform: scale(1.2); }
 }
 
-/* Smooth scrolling */
 html { scroll-behavior: smooth; }
 
-/* Selection color */
 ::selection {
   background: rgba(0, 234, 255, 0.3);
   color: #fff;
 }
 
-/* Page transition animations */
 @keyframes fadeInUp {
   from {
     opacity: 0;
@@ -46,7 +41,6 @@ html { scroll-behavior: smooth; }
   to { opacity: 1; }
 }
 
-/* Gradient text for special emphasis */
 .gradient-text {
   background: linear-gradient(135deg, #00eaff 0%, #ff79c6 100%);
   -webkit-background-clip: text;
@@ -54,7 +48,6 @@ html { scroll-behavior: smooth; }
   background-clip: text;
 }
 
-/* Better scrollbar styling */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -73,31 +66,26 @@ html { scroll-behavior: smooth; }
   background: rgba(0, 234, 255, 0.5);
 }
 
-/* Responsive typography adjustments */
 @media (max-width: 600px) {
   body {
     font-size: 14px;
   }
 }
 
-/* Link hover effects */
 a {
   transition: color 0.2s ease;
 }
 
-/* Card shimmer effect on hover */
 @keyframes shimmer {
   0% { background-position: -200% 0; }
   100% { background-position: 200% 0; }
 }
 
-/* Ensure images don't overflow */
 img {
   max-width: 100%;
   height: auto;
 }
 
-/* Better button focus states */
 button:focus-visible,
 a:focus-visible {
   outline: 2px solid #00eaff;

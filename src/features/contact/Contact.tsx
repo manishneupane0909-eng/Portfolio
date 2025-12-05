@@ -23,6 +23,11 @@ export const Contact: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!form.name || !form.email || !form.message) {
+      return;
+    }
+
     setIsSubmitting(true);
     setStatus('loading');
 
@@ -32,13 +37,18 @@ export const Contact: React.FC = () => {
     );
     const mailtoLink = `mailto:hi@mneupane.com?subject=${subject}&body=${body}`;
 
-    window.location.href = mailtoLink;
-    
-    setTimeout(() => {
+    try {
+      window.location.href = mailtoLink;
       setStatus('ok');
-      setForm({ name: '', email: '', message: '' });
+      setTimeout(() => {
+        setForm({ name: '', email: '', message: '' });
+        setIsSubmitting(false);
+        setStatus('idle');
+      }, 2000);
+    } catch (err) {
       setIsSubmitting(false);
-    }, 500);
+      setStatus('idle');
+    }
   };
 
   return (
@@ -62,7 +72,12 @@ export const Contact: React.FC = () => {
 
             {status === 'ok' && (
               <Alert severity="success" sx={{ mb: 2 }}>
-                Opening your email client... If it didn't open, use the "Email directly" button.
+                Opening email client... If it doesn't open, click "Email directly" below.
+              </Alert>
+            )}
+            {status === 'loading' && (
+              <Alert severity="info" sx={{ mb: 2 }}>
+                Preparing email...
               </Alert>
             )}
 
