@@ -49,17 +49,5 @@ export const projectsList: Project[] = [
     image: null,
     featured: false,
   },
-  {
-    name: 'Daktronics Display Visualizer',
-    tags: ['JavaScript', 'Data Visualization', 'Hardware Integration'],
-    description:
-      'Data visualization tools for LED display systems. Built during internship to help engineers preview content layouts and debug display configurations before deployment.',
-    highlights:
-      'Problem: Display debugging required physical hardware → Built simulator → Reduced testing cycles by 50%',
-    github: null,
-    demo: null,
-    image: null,
-    featured: false,
-  },
 ];
 
