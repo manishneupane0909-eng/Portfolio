@@ -32,21 +32,27 @@ export const Contact: React.FC = () => {
       return;
     }
 
-    if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+    const hasEmailJS = SERVICE_ID && TEMPLATE_ID && PUBLIC_KEY && 
+                       SERVICE_ID !== '' && TEMPLATE_ID !== '' && PUBLIC_KEY !== '';
+
+    if (!hasEmailJS) {
       const subject = encodeURIComponent(`Contact from ${form.name}`);
       const body = encodeURIComponent(
         `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
       );
       window.open(`mailto:hi@mneupane.com?subject=${subject}&body=${body}`, '_blank');
       setStatus('ok');
-      setForm({ name: '', email: '', message: '' });
+      setTimeout(() => {
+        setForm({ name: '', email: '', message: '' });
+        setStatus('idle');
+      }, 2000);
       return;
     }
 
     setStatus('loading');
 
     try {
-      await emailjs.send(
+      const result = await emailjs.send(
         SERVICE_ID,
         TEMPLATE_ID,
         {
@@ -58,13 +64,17 @@ export const Contact: React.FC = () => {
         PUBLIC_KEY
       );
 
-      setStatus('ok');
-      setForm({ name: '', email: '', message: '' });
-      
-      setTimeout(() => {
-        setStatus('idle');
-      }, 3000);
+      if (result.text === 'OK') {
+        setStatus('ok');
+        setForm({ name: '', email: '', message: '' });
+        setTimeout(() => {
+          setStatus('idle');
+        }, 3000);
+      } else {
+        throw new Error('EmailJS returned non-OK status');
+      }
     } catch (err) {
+      console.error('EmailJS error:', err);
       setStatus('error');
       setTimeout(() => {
         setStatus('idle');
