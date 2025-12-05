@@ -26,28 +26,16 @@ export const projectsList: Project[] = [
     featured: true,
   },
   {
-    name: 'Magnetometer Data Pipeline',
-    tags: ['Python', 'MATLAB', 'Data Automation', 'Signal Processing'],
+    name: 'SecurePath',
+    tags: ['Django', 'React', 'Python', 'PostgreSQL', 'Machine Learning', 'Plaid API'],
     description:
-      'Automated analysis pipeline for VSM/PPMS magnetometer data. Extracts saturation magnetization (Ms), coercivity (Hc), and remanence (Mr) from hysteresis loops with ML-based noise reduction.',
+      'Full-stack fraud detection system for financial transactions. Uses scikit-learn for ML-based risk scoring, integrates with Plaid for bank data, and provides real-time fraud monitoring dashboard.',
     highlights:
-      'Problem: Manual M-H analysis took hours → Automated extraction → 80% faster analysis, reproducible results',
-    github: 'https://github.com/manishneupane0909-eng/magnetometer-pipeline',
+      'Problem: Manual fraud detection slow and error-prone → Built automated ML pipeline → Real-time risk scoring for transactions',
+    github: 'https://github.com/manishneupane0909-eng/securepath',
     demo: null,
     image: null,
     featured: true,
-  },
-  {
-    name: 'Starship Fleet Telemetry Dashboard',
-    tags: ['Python', 'Real-time Data', 'Robotics', 'Monitoring'],
-    description:
-      'Internal telemetry and monitoring system for autonomous delivery robot fleets. Tracks robot state, battery levels, delivery status, and implements predictive maintenance alerts.',
-    highlights:
-      'Problem: Robot failures caused delivery delays → Built predictive monitoring → Contributed to 99% fleet uptime',
-    github: null,
-    demo: null,
-    image: null,
-    featured: false,
   },
 ];
 
