@@ -15,7 +15,6 @@ import { ContactForm, ContactStatus } from '@/shared/types';
 export const Contact: React.FC = () => {
   const [form, setForm] = useState<ContactForm>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<ContactStatus>('idle');
-  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -28,27 +27,20 @@ export const Contact: React.FC = () => {
       return;
     }
 
-    setIsSubmitting(true);
-    setStatus('loading');
-
     const subject = encodeURIComponent(`Contact from ${form.name}`);
     const body = encodeURIComponent(
       `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
     );
     const mailtoLink = `mailto:hi@mneupane.com?subject=${subject}&body=${body}`;
 
-    try {
-      window.location.href = mailtoLink;
-      setStatus('ok');
-      setTimeout(() => {
-        setForm({ name: '', email: '', message: '' });
-        setIsSubmitting(false);
-        setStatus('idle');
-      }, 2000);
-    } catch (err) {
-      setIsSubmitting(false);
+    window.open(mailtoLink, '_blank');
+    
+    setStatus('ok');
+    setForm({ name: '', email: '', message: '' });
+    
+    setTimeout(() => {
       setStatus('idle');
-    }
+    }, 3000);
   };
 
   return (
@@ -72,12 +64,7 @@ export const Contact: React.FC = () => {
 
             {status === 'ok' && (
               <Alert severity="success" sx={{ mb: 2 }}>
-                Opening email client... If it doesn't open, click "Email directly" below.
-              </Alert>
-            )}
-            {status === 'loading' && (
-              <Alert severity="info" sx={{ mb: 2 }}>
-                Preparing email...
+                Check your email client - the message should be ready to send.
               </Alert>
             )}
 
@@ -90,7 +77,6 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.name}
                 onChange={handleChange}
-                disabled={isSubmitting}
               />
               <TextField
                 name="email"
@@ -101,7 +87,6 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.email}
                 onChange={handleChange}
-                disabled={isSubmitting}
               />
               <TextField
                 name="message"
@@ -113,7 +98,6 @@ export const Contact: React.FC = () => {
                 margin="normal"
                 value={form.message}
                 onChange={handleChange}
-                disabled={isSubmitting}
               />
               <input
                 type="text"
@@ -135,10 +119,9 @@ export const Contact: React.FC = () => {
                   type="submit"
                   variant="contained"
                   color="primary"
-                  disabled={isSubmitting}
                   sx={{ fontWeight: 600, flex: { xs: 1, sm: 'none' } }}
                 >
-                  {isSubmitting ? 'Sending...' : 'Send'}
+                  Send
                 </Button>
                 <Button
                   variant="outlined"
