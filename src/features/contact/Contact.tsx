@@ -12,8 +12,6 @@ import {
 import { motion } from 'framer-motion';
 import { ContactForm, ContactStatus } from '@/shared/types';
 
-const FORMSPREE_ID = 'your_form_id';
-
 export const Contact: React.FC = () => {
   const [form, setForm] = useState<ContactForm>({ name: '', email: '', message: '' });
   const [status, setStatus] = useState<ContactStatus>('idle');
@@ -23,30 +21,24 @@ export const Contact: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatus('loading');
 
-    try {
-      const response = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
-      });
+    const subject = encodeURIComponent(`Contact from ${form.name}`);
+    const body = encodeURIComponent(
+      `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
+    );
+    const mailtoLink = `mailto:hi@mneupane.com?subject=${subject}&body=${body}`;
 
-      if (!response.ok) {
-        throw new Error('Submission failed');
-      }
-
+    window.location.href = mailtoLink;
+    
+    setTimeout(() => {
       setStatus('ok');
       setForm({ name: '', email: '', message: '' });
-    } catch (err) {
-      console.error('Submit error:', err);
-      setStatus('error');
-    } finally {
       setIsSubmitting(false);
-    }
+    }, 500);
   };
 
   return (
@@ -70,12 +62,7 @@ export const Contact: React.FC = () => {
 
             {status === 'ok' && (
               <Alert severity="success" sx={{ mb: 2 }}>
-                Thanks! I'll reply by email.
-              </Alert>
-            )}
-            {status === 'error' && (
-              <Alert severity="error" sx={{ mb: 2 }}>
-                Sorry, something went wrong. Try again or email me directly.
+                Opening your email client... If it didn't open, use the "Email directly" button.
               </Alert>
             )}
 
@@ -141,7 +128,7 @@ export const Contact: React.FC = () => {
                 <Button
                   variant="outlined"
                   color="secondary"
-                  href="mailto:manishneupane0909@gmail.com"
+                  href="mailto:hi@mneupane.com"
                   sx={{ flex: { xs: 1, sm: 'none' } }}
                 >
                   Email directly
