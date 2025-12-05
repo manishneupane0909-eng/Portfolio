@@ -1,4 +1,3 @@
-// src/App.js
 import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CssBaseline, ThemeProvider, createTheme, Container, Box, Typography } from '@mui/material';
@@ -12,18 +11,6 @@ import ParticleBG from './components/ParticleBG';
 import SEO from './components/SEO';
 import './App.css';
 
-// Google Analytics - uncomment when ready
-// import ReactGA from 'react-ga4';
-// ReactGA.initialize('G-YOUR_TRACKING_ID');
-// function PageTracker() {
-//   const location = useLocation();
-//   useEffect(() => {
-//     ReactGA.pageview(location.pathname + location.search);
-//   }, [location]);
-//   return null;
-// }
-
-// Simple error boundary
 class ErrorBoundary extends React.Component {
   state = { hasError: false, error: null };
 
@@ -49,7 +36,6 @@ class ErrorBoundary extends React.Component {
   }
 }
 
-// Persisted theme preference
 const getInitialMode = () => {
   const saved = localStorage.getItem('prefers-mode');
   return saved === 'light' ? 'light' : 'dark';
@@ -88,7 +74,6 @@ export default function App() {
       <CssBaseline />
       <ParticleBG />
       <Router>
-        {/* <PageTracker /> */}
         <SEO />
         <Navbar mode={mode} onToggleMode={toggleMode} />
         <Container maxWidth="md" sx={{ mt: 10, mb: 5, position: 'relative', zIndex: 1 }}>

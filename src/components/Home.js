@@ -1,4 +1,3 @@
-// src/components/Home.js - Enhanced hero with recruiter-focused metrics
 import React from 'react';
 import { Box, Paper, Typography, Stack, Button, Chip, Avatar, Grid, Card, CardContent, ListItemIcon, Link as MuiLink } from '@mui/material';
 import { motion } from 'framer-motion';
@@ -11,10 +10,8 @@ import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import WorkIcon from '@mui/icons-material/Work';
 import SchoolIcon from '@mui/icons-material/School';
 
-// Pick featured projects only
 const featuredProjects = projectsList.filter(p => p.featured);
 
-// Key achievements for recruiter impact
 const achievements = [
   { metric: '99%', label: 'Robot Fleet Uptime', context: 'at Starship Technologies' },
   { metric: '80%', label: 'Faster Data Analysis', context: 'via automation scripts' },
@@ -24,11 +21,8 @@ const achievements = [
 export default function Home() {
   return (
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4, pt: 6 }}>
-      {/* HERO */}
       <motion.div initial={{ opacity: 0, y: -40 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9 }}>
         <Paper elevation={12} sx={{ p: { xs: 3, sm: 5 }, background: 'linear-gradient(135deg, rgba(24,38,44,0.95) 0%, rgba(20,30,38,0.98) 100%)', borderRadius: 6, boxShadow: '0 12px 40px #00eaff33', color: '#eaf8fa', border: '1px solid rgba(0,234,255,0.1)' }}>
-          
-          {/* Status Badge */}
           <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 0.3 }}>
             <Chip 
               icon={<RocketLaunchIcon sx={{ fontSize: 16 }} />}
@@ -69,8 +63,6 @@ export default function Home() {
               <Typography variant="h5" sx={{ mt: 1, fontWeight: 400, color: '#a8c5ca', lineHeight: 1.4 }}>
                 I turn lab data into production systems—from Heusler alloys to autonomous robots.
               </Typography>
-              
-              {/* Quick Context Pills */}
               <Stack direction="row" spacing={1} sx={{ mt: 2, flexWrap: 'wrap', gap: 1 }}>
                 <Chip icon={<SchoolIcon />} label="BS Physics + CS @ SDSU '26" size="small" variant="outlined" sx={{ borderColor: 'rgba(255,255,255,0.2)', color: '#cddede' }} />
                 <Chip icon={<WorkIcon />} label="Starship • Daktronics • SDSU Lab" size="small" variant="outlined" sx={{ borderColor: 'rgba(255,255,255,0.2)', color: '#cddede' }} />
@@ -100,7 +92,6 @@ export default function Home() {
             </Box>
           </Stack>
 
-          {/* IMPACT METRICS - Recruiter focused */}
           <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid rgba(255,255,255,0.08)' }}>
             <Typography variant="overline" sx={{ color: '#6b7c85', mb: 2, display: 'block' }}>
               Quantified Impact
@@ -136,10 +127,7 @@ export default function Home() {
         </Paper>
       </motion.div>
 
-      {/* LOGO / PROOF ROW */}
       <LogoRow />
-
-      {/* FEATURED PROJECTS */}
       <section>
         <Typography variant="h5" sx={{ fontWeight: 800, mb: 2, color: 'primary.main' }}>Featured work</Typography>
         <Typography variant="body2" sx={{ mb: 3, color: '#cfe8ea' }}>Problem → Action → Result snapshots. Full list on the Projects page.</Typography>
@@ -147,7 +135,7 @@ export default function Home() {
           {featuredProjects.map((p, i) => (
             <Grid item xs={12} sm={6} md={4} key={p.name}>
               <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4, delay: i * 0.05 }}>
-                <Card elevation={6} sx={{ height: 'auto', background: 'rgba(24,38,44,0.85)', borderRadius: 4, transition: 'all 0.3s', '&:hover': { boxShadow: '0 4px 12px #00eaff55' } }}>  {/* Changed to height: 'auto' */}
+                <Card elevation={6} sx={{ height: 'auto', background: 'rgba(24,38,44,0.85)', borderRadius: 4, transition: 'all 0.3s', '&:hover': { boxShadow: '0 4px 12px #00eaff55' } }}>
                   <CardContent sx={{ p: 3 }}>
                     <Typography variant="h6" sx={{ fontWeight: 700 }}>{p.name}</Typography>
                     <Typography variant="body2" sx={{ color: '#cddede', mt: 1, mb: 2 }}>{p.description}</Typography>
@@ -167,7 +155,6 @@ export default function Home() {
         </Grid>
       </section>
 
-      {/* CURRENT FOCUS */}
       <Paper elevation={8} sx={{ p: 3, borderRadius: 4, background: 'rgba(24,38,44,0.85)', border: '1px solid rgba(0,234,255,0.08)' }}>
         <Stack direction="row" alignItems="center" spacing={1} sx={{ mb: 2 }}>
           <Box sx={{ width: 8, height: 8, borderRadius: '50%', bgcolor: '#4ade80', animation: 'pulse 2s infinite' }} />
@@ -216,7 +203,6 @@ export default function Home() {
         </Box>
       </Paper>
 
-      {/* WHAT I'M LOOKING FOR - Recruiter-optimized */}
       <Paper elevation={0} sx={{ p: 4, borderRadius: 4, background: 'linear-gradient(135deg, rgba(255,121,198,0.08) 0%, rgba(0,234,255,0.08) 100%)', border: '1px solid rgba(255,121,198,0.15)' }}>
         <Typography variant="h5" sx={{ fontWeight: 800, mb: 1 }}>Ideal Next Role</Typography>
         <Typography variant="body1" sx={{ color: '#cfe8ea', mb: 3, lineHeight: 1.7 }}>
@@ -250,7 +236,6 @@ export default function Home() {
         </Stack>
       </Paper>
 
-      {/* FOOTER CTA */}
       <Box sx={{ textAlign: 'center' }}>
         <Typography variant="body2" sx={{ opacity: 0.8 }}>Like what you see? I reply fast on email.</Typography>
         <Button sx={{ mt: 1 }} variant="text" color="primary" href="mailto:manishneupane0909@gmail.com">manishneupane0909@gmail.com</Button>

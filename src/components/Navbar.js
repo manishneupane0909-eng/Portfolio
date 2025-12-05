@@ -1,4 +1,3 @@
-// src/components/Navbar.js (updated with Research link)
 import React from 'react';
 import { AppBar, Toolbar, Typography, Box, Button, IconButton, Avatar, Tooltip, Switch } from '@mui/material';
 import { Link, useLocation } from 'react-router-dom';
@@ -9,7 +8,7 @@ const navItems = [
   { label: 'Home', to: '/' },
   { label: 'About', to: '/about' },
   { label: 'Projects', to: '/projects' },
-  { label: 'Research', to: '/research' }, // New item
+  { label: 'Research', to: '/research' },
   { label: 'Contact', to: '/contact' }
 ];
 
