@@ -48,11 +48,9 @@ export const Contact: React.FC = () => {
 
     try {
       const templateParams = {
-        to_email: 'hi@mneupane.com',
-        from_name: form.name,
-        from_email: form.email,
+        name: form.name,
+        email: form.email,
         message: form.message,
-        reply_to: form.email,
       };
 
       const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
