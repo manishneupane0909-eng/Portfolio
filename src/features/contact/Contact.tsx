@@ -25,8 +25,9 @@ export const Contact: React.FC = () => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    e.stopPropagation();
     
     if (!form.name || !form.email || !form.message) {
       return;
@@ -36,16 +37,10 @@ export const Contact: React.FC = () => {
                        SERVICE_ID.length > 0 && TEMPLATE_ID.length > 0 && PUBLIC_KEY.length > 0;
 
     if (!hasEmailJS) {
-      const subject = encodeURIComponent(`Contact from ${form.name}`);
-      const body = encodeURIComponent(
-        `Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`
-      );
-      window.open(`mailto:hi@mneupane.com?subject=${subject}&body=${body}`, '_blank');
-      setStatus('ok');
+      setStatus('error');
       setTimeout(() => {
-        setForm({ name: '', email: '', message: '' });
         setStatus('idle');
-      }, 2000);
+      }, 3000);
       return;
     }
 
@@ -115,7 +110,7 @@ export const Contact: React.FC = () => {
               </Alert>
             )}
 
-            <form onSubmit={handleSubmit} aria-label="contact form">
+            <form onSubmit={handleSubmit} aria-label="contact form" noValidate>
               <TextField
                 name="name"
                 label="Name"
