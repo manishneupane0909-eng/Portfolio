@@ -37,6 +37,11 @@ export const Contact: React.FC = () => {
                        SERVICE_ID.length > 0 && TEMPLATE_ID.length > 0 && PUBLIC_KEY.length > 0;
 
     if (!hasEmailJS) {
+      console.error('EmailJS not configured:', {
+        hasServiceId: !!SERVICE_ID,
+        hasTemplateId: !!TEMPLATE_ID,
+        hasPublicKey: !!PUBLIC_KEY,
+      });
       setStatus('error');
       setTimeout(() => {
         setStatus('idle');
@@ -53,9 +58,13 @@ export const Contact: React.FC = () => {
         message: form.message,
       };
 
+      console.log('Sending email with params:', { SERVICE_ID, TEMPLATE_ID, templateParams });
+
       const result = await emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY);
 
-      if (result.status === 200) {
+      console.log('EmailJS result:', result);
+
+      if (result.status === 200 || result.text === 'OK') {
         setStatus('ok');
         setForm({ name: '', email: '', message: '' });
         setTimeout(() => {
